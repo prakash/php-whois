@@ -102,7 +102,8 @@ class CurlLoader implements ILoader
         $result = curl_exec($curl);
         $errstr = curl_error($curl);
         $errno = curl_errno($curl);
-        curl_close($curl);
+        // Frees the handle, curl_close() is deprecated since PHP 8.5
+        unset($curl);
         fclose($input);
 
         if ($result === false) {
